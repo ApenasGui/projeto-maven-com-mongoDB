@@ -1,5 +1,6 @@
 package com.guilhermesilva.workshopmongo.service;
 
+import com.guilhermesilva.workshopmongo.Resources.exception.ResourceNotFoundException;
 import com.guilhermesilva.workshopmongo.domain.User;
 import com.guilhermesilva.workshopmongo.dto.UserDTO;
 import com.guilhermesilva.workshopmongo.repository.UserRepository;
@@ -28,7 +29,24 @@ public class UserService {
         return repository.insert(obj);
     }
 
+    public void delete(String id){
+        findById(id);
+        repository.deleteById(id);
+    }
+
+    public User update(User obj){
+        User newObj = repository.findById(obj.getId()).orElseThrow(() -> new ResourceNotFoundException("Usuário não encontrado"));
+        updateData(newObj, obj);
+        return repository.save(newObj);
+    }
+
+    private void updateData(User newObj, User obj) {
+        newObj.setName(obj.getName());
+        newObj.setEmail(obj.getEmail());
+    }
+
     public User fromDTO(UserDTO objDTO){
         return new User(objDTO.getId(), objDTO.getName(), objDTO.getEmail());
     }
+
 }
