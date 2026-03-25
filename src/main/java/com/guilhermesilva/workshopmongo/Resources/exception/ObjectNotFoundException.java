@@ -1,4 +1,4 @@
-package com.guilhermesilva.workshopmongo.service;
+package com.guilhermesilva.workshopmongo.Resources.exception;
 
 public class ObjectNotFoundException extends RuntimeException{
 

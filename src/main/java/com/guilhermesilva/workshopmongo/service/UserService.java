@@ -1,5 +1,6 @@
 package com.guilhermesilva.workshopmongo.service;
 
+import com.guilhermesilva.workshopmongo.Resources.exception.ObjectNotFoundException;
 import com.guilhermesilva.workshopmongo.Resources.exception.ResourceNotFoundException;
 import com.guilhermesilva.workshopmongo.domain.User;
 import com.guilhermesilva.workshopmongo.dto.UserDTO;

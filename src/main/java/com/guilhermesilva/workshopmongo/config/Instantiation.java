@@ -3,6 +3,7 @@ package com.guilhermesilva.workshopmongo.config;
 import com.guilhermesilva.workshopmongo.domain.Post;
 import com.guilhermesilva.workshopmongo.domain.User;
 import com.guilhermesilva.workshopmongo.dto.AuthorDTO;
+import com.guilhermesilva.workshopmongo.dto.CommentDTO;
 import com.guilhermesilva.workshopmongo.repository.PostRepository;
 import com.guilhermesilva.workshopmongo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,11 +42,17 @@ public class Instantiation implements CommandLineRunner {
         Post post3 = new Post(null, simpleDateFormat.parse("21/03/2026"), "Dicas de estudos", "Alguém sabe dicas pra estudar 10 minutos e aprender tudo enquanto scrollo o TikTok?", new AuthorDTO(maria));
         Post post4 = new Post(null, simpleDateFormat.parse("19/03/2026"), "Assisti Jujutsu e...", "Achei uma porcaria viu spike", new AuthorDTO(alex));
 
+        CommentDTO c1 = new CommentDTO("KKKKKK sim linda", simpleDateFormat.parse("22/03/2026"), new AuthorDTO(guilherme));
+        CommentDTO c2 = new CommentDTO("Se mata logo cara kkkkk", simpleDateFormat.parse("22/03/2026"), new AuthorDTO(alex));
+
+        post1.getCommentDTOList().add(c2);
+        post3.getCommentDTOList().add(c1);
+
         postRepository.saveAll(Arrays.asList(post1, post2, post3, post4));
 
         guilherme.getPostsDoUsuario().addAll(Arrays.asList(post1, post2));
-        maria.getPostsDoUsuario().addAll(Arrays.asList(post3));
-        alex.getPostsDoUsuario().addAll(Arrays.asList(post4));
+        maria.getPostsDoUsuario().add(post3);
+        alex.getPostsDoUsuario().add(post4);
         userRepository.save(maria);
         userRepository.save(guilherme);
         userRepository.save(alex);
